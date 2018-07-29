@@ -20,6 +20,11 @@ public class Leader {
 
     public Leader(){}
 
+    public Leader(String name, Klass klass) {
+        this.name = name;
+        this.klass = klass;
+    }
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

@@ -1,28 +1,28 @@
-package com.oocl.jpacompanypractice.one.to.one.entities;
+package com.oocl.jpacompanypractice.n.to.n.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
-@Table
 @Entity
-public class Klass {
+@Table
+public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
-
     @JsonIgnore
-    @OneToOne(mappedBy = "klass",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name = "leader_name")
-    private Leader leader;
+    @ManyToMany(mappedBy = "groups")
+    private List<User> users = new ArrayList<>();
 
-    public Klass(){}
+    public Group(){}
 
-    public Klass(String name, Leader leader) {
+    public Group(String name, List<User> users) {
         this.name = name;
-        this.leader = leader;
+        this.users = users;
     }
 
     public Long getId() { return id; }
@@ -31,6 +31,6 @@ public class Klass {
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 
-    public Leader getLeader() { return leader; }
-    public void setLeader(Leader leader) { this.leader = leader; }
+    public List<User> getUsers() { return users; }
+    public void setUsers(List<User> users) { this.users = users; }
 }
